@@ -1,0 +1,7 @@
+# Auto-generated backups (Hyprland writes *.lua.bak.<timestamp> in place)
+*.bak.*
+
+# Logs, sockets, caches that may appear inside a package directory
+**/*.log
+**/*.sock
+fcitx5/.config/fcitx5/conf/cached_layouts
