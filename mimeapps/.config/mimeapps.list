@@ -7,3 +7,4 @@ x-scheme-handler/about=firefox.desktop
 x-scheme-handler/unknown=firefox.desktop
 x-scheme-handler/mailto=firefox.desktop
 x-scheme-handler/claude-cli=claude-code-url-handler.desktop
+x-terminal-emulator=foot.desktop

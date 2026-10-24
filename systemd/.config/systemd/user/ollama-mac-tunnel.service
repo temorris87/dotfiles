@@ -1,0 +1,18 @@
+[Unit]
+Description=SSH tunnel to Ollama on the Mac (localhost:11435 -> mac:11434, over Tailscale)
+
+[Service]
+Type=simple
+# Forwards a local port to the Mac's localhost-only Ollama. BatchMode: never prompt, fail instead.
+ExecStart=/usr/bin/ssh -N \
+  -o BatchMode=yes \
+  -o ExitOnForwardFailure=yes \
+  -o ServerAliveInterval=30 \
+  -o ServerAliveCountMax=3 \
+  -L 127.0.0.1:11435:127.0.0.1:11434 \
+  mac
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=default.target

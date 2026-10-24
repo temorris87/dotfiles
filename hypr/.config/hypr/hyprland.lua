@@ -27,3 +27,13 @@ require("default.hypr.toggles")
 
 -- Add any other personal Hyprland configuration below.
 -- o.window("qemu", { workspace = "5" })
+
+-- Pin every numbered workspace to the LG ultrawide (DP-3).
+-- Without this, Hyprland ties each workspace to whichever monitor it was first
+-- opened on. When an empty workspace ends up parked on the laptop panel (eDP-1),
+-- pressing SUPER+<n> from the ultrawide silently moves focus to the laptop
+-- instead of showing that empty workspace where you're looking.
+-- If DP-3 is unplugged, Hyprland relocates these to whatever monitor remains.
+for n = 1, 10 do
+  hl.workspace_rule({ workspace = tostring(n), monitor = "DP-3" })
+end

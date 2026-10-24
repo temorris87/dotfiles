@@ -5,6 +5,13 @@ local omarchy_gdk_scale = 2
 local omarchy_monitor_scale = "auto"
 
 hl.env("GDK_SCALE", tostring(omarchy_gdk_scale))
+
+-- Explicit per-monitor config. The LG ultrawide supports 75Hz but "preferred"
+-- picks its 60Hz mode, so pin it.
+hl.monitor({ output = "DP-3", mode = "3840x1600@75", position = "0x0", scale = 1 })
+hl.monitor({ output = "eDP-1", mode = "3840x2160@60", position = "3840x0", scale = 2 })
+
+-- Fallback for any other display that gets plugged in.
 hl.monitor({ output = "", mode = "preferred", position = "auto", scale = omarchy_monitor_scale })
 
 -- Configure a specific monitor.

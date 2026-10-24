@@ -57,6 +57,12 @@
 hl.config({
   general = {
     layout = "master",
+
+    gaps_in = 6,
+    gaps_out = 12,
+    border_size = 2,
+
+    -- Window border colours come from the active theme's hyprland.lua.
   },
 
   master = {
@@ -66,7 +72,54 @@ hl.config({
     new_status = "slave",              -- new windows join the sides; main stays main
     new_on_top = false,
   },
+
+  layout = {
+    -- Constrain a lone window to 16:9 and keep it centered (orientation = center).
+    single_window_aspect_ratio = { 16, 9 },
+  },
+
+  decoration = {
+    rounding = 10,
+
+    dim_inactive = true,
+    dim_strength = 0.08,
+
+    blur = {
+      enabled = true,
+      size = 6,
+      passes = 3,
+      new_optimizations = true,
+      ignore_opacity = true,
+      xray = false,
+      noise = 0.012,
+      contrast = 1.0,
+      brightness = 0.9,
+      vibrancy = 0.18,
+    },
+
+    shadow = {
+      enabled = true,
+      range = 24,
+      render_power = 3,
+      color = "rgba(1a1a1aee)",
+      offset = "0 6",
+    },
+  },
 })
+
+-- Mostly opaque so the bright wallpaper doesn't wash windows out; a hint of
+-- translucency keeps the blur behind them readable.
+o.window({ tag = "default-opacity" }, { opacity = "0.97 0.92" })
+
+-- ── Snappier animations ──────────────────────────────────────────────────
+-- Omarchy's defaults are a touch slow; speed up the window + border curves.
+hl.animation({ leaf = "windows", enabled = true, speed = 5, bezier = "easeOutQuint" })
+hl.animation({ leaf = "windowsIn", enabled = true, speed = 5, bezier = "easeOutQuint", style = "popin 87%" })
+hl.animation({ leaf = "windowsOut", enabled = true, speed = 4, bezier = "easeOutQuint", style = "popin 87%" })
+hl.animation({ leaf = "border", enabled = true, speed = 8, bezier = "easeOutQuint" })
+hl.animation({ leaf = "fadeIn", enabled = true, speed = 4, bezier = "almostLinear" })
+hl.animation({ leaf = "fadeOut", enabled = true, speed = 4, bezier = "almostLinear" })
+hl.animation({ leaf = "layers", enabled = true, speed = 5, bezier = "easeOutQuint" })
 
 -- To flip a single workspace back to dwindle, add a rule such as:
 -- hl.workspace_rule({ workspace = "9", layout = "dwindle" })
